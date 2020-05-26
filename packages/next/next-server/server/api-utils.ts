@@ -98,7 +98,10 @@ export async function apiResolver(
  * Parse incoming message like `json` or `urlencoded`
  * @param req request object
  */
-export async function parseBody(req: NextApiRequest, limit: string | number) {
+export async function parseBody(
+  req: NextApiRequest,
+  limit: string | number
+): Promise<{ body: any; rawBody: Buffer }> {
   const contentType = parse(req.headers['content-type'] || 'text/plain')
   const { type, parameters } = contentType
   const encoding = parameters.charset || 'utf-8'
